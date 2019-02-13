@@ -26,18 +26,19 @@ for i in range(len(Pbest_particle_list)):
         minimum = Pbest_particle_list[i].consumption
         flag = i
 
-Gbest_particle = Pbest_particle_list[flag]
+Gbest_particle = copy.deepcopy(Pbest_particle_list[flag])
 
 iteration = 0
-while iteration < 10:
+while iteration < 1000:
     for paticle in Particle_list:
         paticle.consumption = evaluation.evaluate(paticle.position,device)
     for i in range(len(Particle_list)):
+        print(i,' particle',Particle_list[i].consumption)
         Particle_list[i].update(Pbest_particle_list[i],Gbest_particle)
 
     Pbest_particle_list = pso_operator.update_Pbest(Particle_list,Pbest_particle_list)
     Gbest_particle = pso_operator.update_Gbest(Pbest_particle_list,Gbest_particle)
-    print(Gbest_particle.consumption)
+    print('Gbest:',Gbest_particle.consumption)
     iteration += 1
 
 

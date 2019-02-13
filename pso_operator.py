@@ -14,20 +14,14 @@ def update_Gbest(Pbest_Particle_list , Gbest_Particle):
     return Gbest_Particle
 
 
-def subtraction(Particle,Best_particle):
-    subtraction = Particle.position ^ Best_particle.position
-    return subtraction
+def subtraction(array_x,array_y):
+    subtraction = array_x ^ array_y
+    return subtraction.astype(int)
     
 
 def addition(p1,p2,p3,velocity,Pbest_position,Gbest_position):
     uncertain_index = np.zeros([len(velocity)])
     for i in range(len(velocity)):
-        # if p1 * velocity[i] +\
-        #     p2 * Pbest_position[i] +\
-        #     p3 * Gbest_position[i] != 0 or 1:
-
-        #     uncertain_index[i] = p1 * velocity[i] + p2 * Pbest_position[i] + p3 * Gbest_position[i]
-        
         uncertain_index[i] = \
             p1 * velocity[i] + p2 * Pbest_position[i] + p3 * Gbest_position[i]
 
@@ -38,7 +32,7 @@ def addition(p1,p2,p3,velocity,Pbest_position,Gbest_position):
             else:
                 uncertain_index[i] = 0
     
-    return uncertain_index
+    return uncertain_index.astype(int)
 
 def evaluate_coefficient_p(consumption,Pbest_consumption,Gbest_consumption):
     coefficient_p1 = ( 1 / consumption) / \
@@ -55,6 +49,6 @@ def multiplication(Particle):
         if Particle.velocity[i] == 1:
             Particle.position[i] = not Particle.position[i]
     
-    return Particle.position
+    return Particle.position.astype(int)
 
 
