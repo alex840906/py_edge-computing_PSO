@@ -27,7 +27,7 @@ class MobileDevices():
             return -1, 0
     
 def base_station_location():
-    base_station = base_station = np.loadtxt('py_edge-computing_PSO/datasets/mcc283.txt', delimiter=' ')
+    base_station = base_station = np.loadtxt('py_edge-computing_PSO/datasets/mcc310.txt', delimiter=' ')
 
     return base_station
 

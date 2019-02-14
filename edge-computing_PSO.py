@@ -8,10 +8,11 @@ import evaluation
 import dataset
 import pso_operator
 import copy
+import convergence_graph
 
-particle_num = 10
+particle_num = 50
 device = dataset.generate_device_list()
-data_size = 1094
+data_size = 338
 
 Particle_list = init.create_Particle_list(particle_num,data_size)
 
@@ -29,17 +30,21 @@ for i in range(len(Pbest_particle_list)):
 Gbest_particle = copy.deepcopy(Pbest_particle_list[flag])
 
 iteration = 0
-while iteration < 1000:
-    for paticle in Particle_list:
-        paticle.consumption = evaluation.evaluate(paticle.position,device)
+draw_Gbest = []
+while iteration < 100:
     for i in range(len(Particle_list)):
         print(i,' particle',Particle_list[i].consumption)
         Particle_list[i].update(Pbest_particle_list[i],Gbest_particle)
+    for paticle in Particle_list:
+        paticle.consumption = evaluation.evaluate(paticle.position,device)
 
     Pbest_particle_list = pso_operator.update_Pbest(Particle_list,Pbest_particle_list)
     Gbest_particle = pso_operator.update_Gbest(Pbest_particle_list,Gbest_particle)
     print('Gbest:',Gbest_particle.consumption)
+    draw_Gbest.append(Gbest_particle.consumption)
     iteration += 1
+
+Convergence_garph.draw(draw_Gbest,iteration)
 
 
 

@@ -24,7 +24,7 @@ def addition(p1,p2,p3,velocity,Pbest_position,Gbest_position):
     for i in range(len(velocity)):
         uncertain_index[i] = \
             p1 * velocity[i] + p2 * Pbest_position[i] + p3 * Gbest_position[i]
-
+    #print(uncertain_index)
     for i in range(len(uncertain_index)):
             r = random.uniform(0,1)
             if uncertain_index[i] > r:
@@ -35,12 +35,12 @@ def addition(p1,p2,p3,velocity,Pbest_position,Gbest_position):
     return uncertain_index.astype(int)
 
 def evaluate_coefficient_p(consumption,Pbest_consumption,Gbest_consumption):
-    coefficient_p1 = ( 1 / consumption) / \
-        (( 1 / consumption) + ( 1 / Pbest_consumption) + (1 / Gbest_consumption))
-    coefficient_p2 = ( 1 / Pbest_consumption) / \
-        (( 1 / consumption) + ( 1 / Pbest_consumption) + (1 / Gbest_consumption))
-    coefficient_p3 = ( 1 / Gbest_consumption) / \
-        (( 1 / consumption) + ( 1 / Pbest_consumption) + (1 / Gbest_consumption))
+    coefficient_p1 = consumption / \
+        (consumption +  Pbest_consumption + Gbest_consumption)
+    coefficient_p2 = Pbest_consumption / \
+        (consumption +  Pbest_consumption + Gbest_consumption)
+    coefficient_p3 = Gbest_consumption / \
+        (consumption +  Pbest_consumption + Gbest_consumption)
 
     return coefficient_p1,coefficient_p2,coefficient_p3
 
