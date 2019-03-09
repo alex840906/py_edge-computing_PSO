@@ -16,6 +16,7 @@ def update_Gbest(Pbest_Particle_list , Gbest_Particle):
 
 def subtraction(array_x,array_y):
     subtraction = array_x ^ array_y
+    #print(subtraction)
     return subtraction.astype(int)
     
 
@@ -31,6 +32,7 @@ def addition(p1,p2,p3,velocity,Pbest_position,Gbest_position):
                 uncertain_index[i] = 1
             else:
                 uncertain_index[i] = 0
+    #print(uncertain_index)
     
     return uncertain_index.astype(int)
 
@@ -41,7 +43,7 @@ def evaluate_coefficient_p(consumption,Pbest_consumption,Gbest_consumption):
         (consumption +  Pbest_consumption + Gbest_consumption)
     coefficient_p3 = Gbest_consumption / \
         (consumption +  Pbest_consumption + Gbest_consumption)
-
+    #print (coefficient_p1,coefficient_p2,coefficient_p3)
     return coefficient_p1,coefficient_p2,coefficient_p3
 
 def multiplication(Particle):

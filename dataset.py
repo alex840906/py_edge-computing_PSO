@@ -27,7 +27,7 @@ class MobileDevices():
             return -1, 0
     
 def base_station_location():
-    base_station = base_station = np.loadtxt('py_edge-computing_PSO/datasets/mcc310.txt', delimiter=' ')
+    base_station = base_station = np.loadtxt('dataset/mcc310.txt', delimiter=' ')
 
     return base_station
 
@@ -79,13 +79,13 @@ def generate_population():
     population = np.zeros((1000,2))
     population[:,0] = np.random.uniform(low=left_edge, high=right_edge, size=(1000))
     population[:,1] = np.random.uniform(low=bottom_edge, high=top_edge, size=(1000))
-    np.savetxt("py_edge-computing_PSO/datasets/population.txt", population, fmt="%f", newline='\n')
+    np.savetxt("dataset/population.txt", population, fmt="%f", newline='\n')
 
     return population
 
 def generate_device_list():
     # mobile_devices = generate_population()
-    mobile_devices = np.loadtxt("py_edge-computing_PSO/datasets/population.txt", delimiter=' ')
+    mobile_devices = np.loadtxt("dataset/mcc310.txt", delimiter=' ')
     device_list = []
     for device in range(len(mobile_devices)):
         device_list.append(MobileDevices(mobile_devices[device][0], mobile_devices[device][1]))

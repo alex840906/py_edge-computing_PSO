@@ -62,4 +62,4 @@ def evaluate(solution, device_list):
     utilization = calc_utilization(station_list)
     experience = calc_experience(device_list)
     
-    return (latency + cost + utilization + experience) / 4
+    return (latency * cost * utilization * experience)

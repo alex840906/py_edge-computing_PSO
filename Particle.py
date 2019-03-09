@@ -2,6 +2,7 @@ import random
 import numpy as np
 import pso_operator
 
+
 class Particle(object):
     def __init__(self,position,velocity,consumption):   
         self.position = position
@@ -13,8 +14,16 @@ class Particle(object):
         #print('p1,p2,p3' , p1,p2,p3)
         tmp_Pbest = pso_operator.subtraction(self.position,Pbest_particle.position)
         tmp_Gbest = pso_operator.subtraction(self.position,Gbest_particle.position)
+        #print (tmp_Pbest)
         self.velocity = pso_operator.addition(p1,p2,p3,self.velocity,tmp_Pbest,tmp_Gbest)
         self.position = pso_operator.multiplication(self)
+
+    def mutation(self,mutation_rate):
+        for i in range(len(self.position)):
+            r = random.uniform(0,1)
+            if r < mutation_rate:
+                self.position[i] = not self.position[i]
+
 
 
         
