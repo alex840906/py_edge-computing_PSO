@@ -13,7 +13,7 @@ import convergence_graph
 mutation_rate = 0.1
 particle_num = 10
 device = dataset.generate_device_list()
-data_size = 338
+data_size = 320
 
 Particle_list = init.create_Particle_list(particle_num,data_size)
 
@@ -34,7 +34,7 @@ iteration = 0
 draw_Gbest = []
 while iteration < 1000:
     for i in range(len(Particle_list)):
-        print(i,' particle',Pbest_particle_list[i].consumption)
+        #print(i,' particle',Pbest_particle_list[i].consumption)
         Particle_list[i].update(Pbest_particle_list[i],Gbest_particle)
     for paticle in Particle_list:
         paticle.consumption = evaluation.evaluate(paticle.position,device)
@@ -45,26 +45,11 @@ while iteration < 1000:
     for particle in Particle_list:
         particle.mutation(mutation_rate)
 
-    #print(Particle_list[0].position)
-    print('Gbest:',Gbest_particle.consumption)
-    #print(Particle_list[0].velocity)
+
+    #print('Gbest:',Gbest_particle.consumption)
+
     draw_Gbest.append(Gbest_particle.consumption)
     iteration += 1
-    #print(Particle_list[0].position,Particle_list[0].velocity)
-# for i in range(particle_num):
-#    print('i=',i,'position=',Particle_list[i].position,'velocity=',Particle_list[i].velocity)
+
 
 convergence_graph.draw(draw_Gbest,iteration)
-
-
-
-
-
-
-
-
-
-
-
-
-

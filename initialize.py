@@ -1,6 +1,8 @@
 import random
 import numpy as np
 from Particle import Particle
+import evaluation
+import dataset
 
 def init_deployment_table(deployment_table,data_size):
     for i in range(data_size):
@@ -17,6 +19,9 @@ def create_Particle_list(particle_num,data_size):
         for j in range(data_size):
             r = random.randint(0,1)
             position[j] = r
+
+        a = dataset.generate_device_list()
+        print(position)
 
         ###初始化速度
         velocity = np.zeros([data_size])
