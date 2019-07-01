@@ -21,7 +21,7 @@ def create_Particle_list(particle_num,data_size):
             position[j] = r
 
         a = dataset.generate_device_list()
-        print(position)
+        #print(position)
 
         ###初始化速度
         velocity = np.zeros([data_size])

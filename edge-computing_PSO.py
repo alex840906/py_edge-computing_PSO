@@ -11,14 +11,14 @@ import copy
 import convergence_graph
 
 mutation_rate = 0.1
-particle_num = 10
+particle_num = 50
 device = dataset.generate_device_list()
-data_size = 320
+data_size = dataset.candidate_station_quantity()
 
 Particle_list = init.create_Particle_list(particle_num,data_size)
 
 for paticle in Particle_list:
-    paticle.consumption = evaluation.evaluate(paticle.position,device)
+    paticle.consumption = evaluation.evaluate(paticle.position)
 
 Pbest_particle_list = copy.deepcopy(Particle_list)
 
@@ -29,27 +29,28 @@ for i in range(len(Pbest_particle_list)):
         flag = i
 
 Gbest_particle = copy.deepcopy(Pbest_particle_list[flag])
-
+count = 0
 iteration = 0
+
 draw_Gbest = []
-while iteration < 1000:
+while count < 30000:
     for i in range(len(Particle_list)):
-        #print(i,' particle',Pbest_particle_list[i].consumption)
         Particle_list[i].update(Pbest_particle_list[i],Gbest_particle)
     for paticle in Particle_list:
-        paticle.consumption = evaluation.evaluate(paticle.position,device)
+        paticle.consumption = evaluation.evaluate(paticle.position)
+        count += 1
     
     Pbest_particle_list = pso_operator.update_Pbest(Particle_list,Pbest_particle_list)
     Gbest_particle = pso_operator.update_Gbest(Pbest_particle_list,Gbest_particle)
 
-    for particle in Particle_list:
-        particle.mutation(mutation_rate)
+    # for particle in Particle_list:
+    #     particle.mutation(mutation_rate)
+
+    print(count, end='')
+    print(',', end='')
+    print(Gbest_particle.consumption)
 
 
-    #print('Gbest:',Gbest_particle.consumption)
-
-    draw_Gbest.append(Gbest_particle.consumption)
-    iteration += 1
 
 
 convergence_graph.draw(draw_Gbest,iteration)
